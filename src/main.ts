@@ -7,6 +7,14 @@ async function bootstrap() {
   dotenv.config();
   const app = await NestFactory.create(AppModule);
 
+  // Enable CORS
+  app.enableCors({
+    origin: 'http://localhost:3001', // Replace with your frontend URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
+  // Swagger Configuration
   const config = new DocumentBuilder()
     .setTitle('Loss Database Natural Language Query API')
     .setDescription('API for converting natural language queries to SQL')
